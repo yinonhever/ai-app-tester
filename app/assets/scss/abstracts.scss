@@ -1,0 +1,27 @@
+@mixin respond($breakpoint) {
+  @if $breakpoint == tablet-land {
+    @media only screen and (max-width: 1200px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == tablet {
+    @media only screen and (max-width: 1000px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == mobile {
+    @media only screen and (max-width: 600px) {
+      @content;
+    }
+  }
+}
+
+$padding-sides-desktop: 10vw;
+$padding-sides-mobile: 5vw;
+
+$color1: #1c2c54;
+$color2: #00073d;
+$color3: #020b52;
+$color4: #1976d2;

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { populateScanData } from "../../utils/functions";
+import { convertScanData } from "../../utils/functions";
 
 const ScanInsertSchema = z.object({
   targetUrl: z.string(),
@@ -25,5 +25,5 @@ export default defineEventHandler(async event => {
 
   runScan(scan);
 
-  return populateScanData(scan.toObject());
+  return convertScanData(scan.toObject());
 });

@@ -8,8 +8,11 @@ export const getResultTally = (scan: Scan): Tally => {
   return tally;
 };
 
-export const populateScanData = (scan: Scan): Scan => ({
-  ...scan,
-  scenarioCount: scan.scenarios?.length ?? 0,
-  tally: getResultTally(scan)
-});
+export const convertScanData = (scan: Scan, includeScenarios = true): Scan => {
+  const { scenarios, ...dataWithoutScenarios } = scan;
+  return {
+    ...(includeScenarios ? scan : dataWithoutScenarios),
+    scenarioCount: scenarios?.length ?? 0,
+    tally: getResultTally(scan)
+  };
+};

@@ -1,4 +1,4 @@
-import { populateScanData } from "../../utils/functions";
+import { convertScanData } from "../../utils/functions";
 
 export default defineEventHandler(async event => {
   const scanId = getRouterParam(event, "scanId");
@@ -13,5 +13,5 @@ export default defineEventHandler(async event => {
     });
   }
 
-  return populateScanData(scan);
+  return convertScanData(scan);
 });

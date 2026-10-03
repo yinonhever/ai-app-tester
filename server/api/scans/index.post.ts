@@ -2,8 +2,8 @@ import { z } from "zod";
 import { convertScanData } from "../../utils/functions";
 
 const ScanInsertSchema = z.object({
-  targetUrl: z.string(),
-  maxScenarios: z.number()
+  targetUrl: z.url(),
+  maxScenarios: z.int().min(1)
 });
 
 export default defineEventHandler(async event => {

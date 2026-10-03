@@ -1,11 +1,9 @@
-import { populateScanData } from "../../utils/functions";
-
 export default defineEventHandler(async event => {
   const scanId = getRouterParam(event, "scanId");
 
-  const scan = await Scan.findById(scanId).lean();
+  const deletedScan = await Scan.findByIdAndDelete(scanId);
 
-  if (!scan) {
+  if (!deletedScan) {
     throw createError({
       statusCode: 404,
       statusMessage: "Scan not found",
@@ -13,5 +11,5 @@ export default defineEventHandler(async event => {
     });
   }
 
-  return populateScanData(scan);
+  return { msg: "Successfully deleted scan", scanId };
 });

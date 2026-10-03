@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { populateScanData } from "~~/server/utils/functions";
+import { populateScanData } from "../../utils/functions";
 
 const ScanInsertSchema = z.object({
   targetUrl: z.string(),

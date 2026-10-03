@@ -40,6 +40,8 @@ export interface Scan {
   startDate: Date;
   endDate?: Date;
   scenarios?: Scenario[];
+  scenarioCount?: number;
+  tally?: Tally;
 }
 
 export type Tally = Record<Verdict, number>;

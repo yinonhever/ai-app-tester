@@ -1,4 +1,4 @@
-import type { Scan as ScanData, Tally } from "~~/shared/types";
+import type { Scan as ScanData } from "~~/shared/types";
 
 type WithDatabaseMeta<T> = T & {
   _id: string;
@@ -6,7 +6,4 @@ type WithDatabaseMeta<T> = T & {
   updatedAt: string;
 };
 
-export type Scan = WithDatabaseMeta<ScanData> & {
-  scenarioCount?: number;
-  tally?: Tally;
-};
+export type Scan = WithDatabaseMeta<ScanData>;

@@ -13,7 +13,7 @@ import type {
 } from "../types";
 import type { Evaluation, Scenario, StepResult, Tally } from "~~/shared/types";
 import type { ScanDocument } from "~~/server/models/scan";
-import { getResultTally } from "~~/shared/functions";
+import { getResultTally } from "../functions";
 
 // ---- Stage 1 + 2: plan and prioritize ----
 const buildPlanningPrompt = (state: PageState): string => {

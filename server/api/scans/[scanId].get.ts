@@ -1,7 +1,9 @@
+import { populateScanData } from "~~/server/utils/functions";
+
 export default defineEventHandler(async event => {
   const scanId = getRouterParam(event, "scanId");
 
-  const scan = await Scan.findById(scanId);
+  const scan = await Scan.findById(scanId).lean();
 
   if (!scan) {
     throw createError({
@@ -11,5 +13,5 @@ export default defineEventHandler(async event => {
     });
   }
 
-  return scan;
+  return populateScanData(scan);
 });

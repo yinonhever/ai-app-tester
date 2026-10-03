@@ -1,4 +1,4 @@
-import { getResultTally } from "~~/shared/functions";
+import { getResultTally } from "../../utils/functions";
 
 export default defineEventHandler(async () => {
   const scans = await Scan.find().sort({ startDate: -1 }).lean();

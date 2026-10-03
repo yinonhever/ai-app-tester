@@ -1,13 +1,8 @@
 /// <reference lib="dom" />
 
 import { chromium, type Locator, type Page } from "playwright";
-import type {
-  PageState,
-  ResolveTarget,
-  Scenario,
-  SessionHandle,
-  StepResult
-} from "../types";
+import type { PageState, ResolveTarget, SessionHandle } from "../types";
+import type { Scenario, StepResult } from "~~/shared/types";
 
 const SELECTOR = "button, a, input, select, textarea";
 const VISIBLE_SELECTOR = `${SELECTOR}:visible`; // Playwright's own visibility check, applied consistently everywhere below
@@ -122,7 +117,7 @@ export const snapshot = async (
     failedRequests: newFailedRequests,
     url: page.url()
   };
-}
+};
 
 export const runScenario = async (
   page: Page,
@@ -184,4 +179,4 @@ export const runScenario = async (
     }
   }
   return stepResults;
-}
+};

@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { convertScanData } from "../../utils/functions";
+import { runScan } from "../../utils/tester/runScan";
 
 const ScanInsertSchema = z.object({
   targetUrl: z.url(),

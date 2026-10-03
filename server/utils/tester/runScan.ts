@@ -11,7 +11,7 @@ import type {
   ResolveTargetResponse,
   ScenarioResult
 } from "../types";
-import type { Evaluation, Scenario, StepResult, Tally } from "~~/shared/types";
+import type { Evaluation, Scenario, StepResult } from "~~/shared/types";
 import type { ScanDocument } from "~~/server/models/scan";
 import { getResultTally } from "../functions";
 
@@ -171,16 +171,13 @@ export const runScan = async (scan: ScanDocument) => {
     const start = new Date();
     console.log(`Starting scan ${scanId} on ${targetUrl}`, start);
 
-    scan.currentStage = "Launching automated browser...";
+    scan.currentStage = "Generating test scenarios...";
     await scan.save();
 
     const { browser, page, consoleErrors, failedRequests } =
       await launchSession(targetUrl);
 
     // Stage 1 + 2
-    scan.currentStage = "Generating test scenarios...";
-    await scan.save();
-
     const initialState = await snapshot(page, consoleErrors, failedRequests);
     console.log("Asking Claude to generate and prioritize test scenarios...");
     const { scenarios } = await askClaudeJSON<PlanningResponse>(
@@ -243,9 +240,7 @@ export const runScan = async (scan: ScanDocument) => {
 
     await browser.close();
 
-    console.log(
-      "\n=== AI App Tester Report ===\n"
-    );
+    console.log("\n=== AI App Tester Report ===\n");
     results.forEach(({ scenario, evaluation }) => {
       console.log(
         `[${evaluation.verdict}] ${scenario.description}\n  ${evaluation.explanation}\n`

@@ -33,7 +33,7 @@ export default defineNuxtConfig({
     }
   },
 
-  modules: ["nuxt-mongoose", "@pinia/nuxt", "@nuxt/ui"],
+  modules: ["nuxt-mongoose", "@pinia/nuxt", "vuetify-nuxt-module"],
 
   css: ["~/assets/scss/main.scss"],
 
@@ -51,5 +51,11 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     anthropicApiKey: ""
+  },
+
+  vuetify: {
+    moduleOptions: {
+      prefixComposables: true
+    }
   }
 });

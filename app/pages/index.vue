@@ -1,3 +1,5 @@
 <template>
-  <Page title="New Scan"> page content here </Page>
+  <Page title="New Scan">
+    <p class="text-primary">some text here</p>
+  </Page>
 </template>

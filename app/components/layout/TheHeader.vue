@@ -54,7 +54,7 @@ watch(showMobileMenu, value => {
   z-index: 999;
 
   @include respond(tablet) {
-    padding: 15px 25px;
+    padding: 10px 25px;
   }
 
   @include respond(mobile) {

@@ -6,20 +6,19 @@
 .logo {
   font-family: "Comfortaa", cursive;
   font-weight: 300;
-  font-size: 34px;
+  font-size: 33px;
   letter-spacing: 0.5px;
   cursor: pointer;
-  color: inherit !important;
-  text-decoration: none;
-  display: inline-block;
+  display: block;
   transform: translateY(1px);
 
   @include respond(tablet) {
-    font-size: 31px;
+    font-size: 30px;
   }
 
   @include respond(mobile) {
-    font-size: 28px;
+    font-size: 25px;
+    transform: none;
   }
 }
 </style>

@@ -1,9 +1,14 @@
-@use "tailwindcss";
-@use "@nuxt/ui";
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
 
 // FONT
 html {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
 }
 
 h1,

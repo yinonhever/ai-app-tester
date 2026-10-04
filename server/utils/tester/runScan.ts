@@ -267,6 +267,7 @@ export const runScan = async (scan: ScanDocument) => {
 
     scan.status = "error";
     scan.currentStage = "Failed to complete";
+    scan.endDate = new Date();
     if (err instanceof Error) scan.errorMsg = err.message;
     else if (typeof err === "string") scan.errorMsg = err;
     await scan.save();

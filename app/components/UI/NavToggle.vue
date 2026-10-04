@@ -1,0 +1,65 @@
+<template>
+  <span :class="['nav-toggle', { active }]">
+    <span />
+    <span />
+    <span />
+  </span>
+</template>
+
+<script setup lang="ts">
+defineProps<{ active: boolean }>();
+</script>
+
+<style lang="scss">
+.nav-toggle {
+  display: none;
+
+  @include respond(mobile) {
+    display: block;
+    height: 15px;
+    width: 16px;
+    position: relative;
+    z-index: 9999;
+
+    span {
+      display: block;
+      position: absolute;
+      height: 3px;
+      width: 16px;
+      background-color: #fff;
+      border-radius: 100px;
+      transition: all 0.3s;
+
+      &:nth-child(1) {
+        top: 0;
+      }
+
+      &:nth-child(2) {
+        top: 50%;
+        transform: translateY(-50%);
+        transition: all 0.3s;
+      }
+
+      &:nth-child(3) {
+        bottom: 0;
+      }
+    }
+
+    &.active span {
+      &:nth-child(1) {
+        top: 50%;
+        transform: translateY(-50%) rotate(135deg);
+      }
+
+      &:nth-child(2) {
+        transform: translate(250px, -50%);
+      }
+
+      &:nth-child(3) {
+        bottom: 50%;
+        transform: translateY(50%) rotate(-135deg);
+      }
+    }
+  }
+}
+</style>

@@ -21,7 +21,6 @@ export default defineEventHandler(async event => {
   }
 
   const { targetUrl, maxScenarios } = result.data;
-
   const scan = await Scan.create({ targetUrl, maxScenarios });
 
   runScan(scan);

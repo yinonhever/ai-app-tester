@@ -15,3 +15,8 @@ export type Scan = WithDatabaseMeta<ScanData>;
 export type Scenario = WithDatabaseMeta<ScenarioData>;
 
 export type ScenarioStep = WithDatabaseMeta<ScenarioStepData>;
+
+export interface NavItem {
+  link: string;
+  text: string;
+}

@@ -32,21 +32,16 @@ onMounted(() => {
 <style lang="scss">
 .page {
   position: relative;
-  padding: 30px 3vw 60px;
+  padding: 40px $padding-sides-desktop;
   height: 100%;
 
-  @media only screen and (max-width: 1600px) {
-    padding-left: 2vw;
-    padding-right: 2vw;
-  }
-
   @include respond(tablet-land) {
-    padding-left: 2vw;
-    padding-right: 2vw;
+    padding-left: $padding-sides-mobile;
+    padding-right: $padding-sides-mobile;
   }
 
   @include respond(mobile) {
-    padding: 40px 4vw 65px;
+    padding: 40px $padding-sides-mobile;
   }
 
   &--dense {

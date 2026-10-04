@@ -1,15 +1,22 @@
-@import "tailwindcss";
-@import "@nuxt/ui";
+@use "tailwindcss";
+@use "@nuxt/ui";
 
 // FONT
 html {
-  font-family: "Montserrat", sans-serif !important;
+  font-family: "Montserrat", sans-serif;
 }
 
 h1,
 h2,
 h3 {
   font-family: "Livvic", sans-serif;
+}
+
+// Links
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s;
 }
 
 // PAGE TRANSITION
@@ -20,7 +27,7 @@ h3 {
 
 .page-enter-active,
 .page-leave-active {
-  transition: opacity 0.45s;
+  transition: opacity 0.4s;
 }
 
 .page-enter-to,

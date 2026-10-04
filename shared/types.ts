@@ -15,6 +15,7 @@ export interface Scenario {
   description: string;
   steps: ScenarioStep[];
   evaluation?: Evaluation;
+  scenarioNum?: number;
 }
 
 export type Verdict = (typeof VERDICTS)[number];

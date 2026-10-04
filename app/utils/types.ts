@@ -12,8 +12,6 @@ type WithDatabaseMeta<T> = T & {
 
 export type Scan = WithDatabaseMeta<ScanData>;
 
-export type Scenario = WithDatabaseMeta<ScenarioData> & {
-  scenarioNum?: number;
-};
+export type Scenario = WithDatabaseMeta<ScenarioData>;
 
 export type ScenarioStep = WithDatabaseMeta<ScenarioStepData>;

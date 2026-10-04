@@ -10,6 +10,13 @@ export const getResultTally = (scan: Scan): Tally => {
 
 export const convertScanData = (scan: Scan, includeScenarios = true): Scan => {
   const { scenarios, ...dataWithoutScenarios } = scan;
+
+  if (includeScenarios) {
+    scenarios?.forEach((scenario, index) => {
+      scenario.scenarioNum = index + 1;
+    });
+  }
+  
   return {
     ...(includeScenarios ? scan : dataWithoutScenarios),
     scenarioCount: scenarios?.length ?? 0,

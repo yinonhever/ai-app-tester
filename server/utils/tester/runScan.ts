@@ -9,9 +9,10 @@ import type {
   PageState,
   PlanningResponse,
   ResolveTargetResponse,
-  ScenarioResult
+  ScenarioResult,
+  StepResult
 } from "../types";
-import type { Evaluation, Scenario, StepResult } from "~~/shared/types";
+import type { Evaluation, Scenario } from "~~/shared/types";
 import type { ScanDocument } from "~~/server/models/scan";
 import { getResultTally } from "../functions";
 
@@ -263,5 +264,11 @@ export const runScan = async (scan: ScanDocument) => {
     );
   } catch (err: any) {
     console.log(`Error in running scan ${scanId} on ${targetUrl}`, err);
+
+    scan.status = "error";
+    scan.currentStage = "Failed to complete";
+    if (err instanceof Error) scan.errorMsg = err.message;
+    else if (typeof err === "string") scan.errorMsg = err;
+    await scan.save();
   }
 };

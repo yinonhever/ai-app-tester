@@ -1,5 +1,5 @@
 import type { Browser, Page } from "playwright";
-import type { Scenario, Evaluation } from "~~/shared/types";
+import type { Scenario, ScenarioStep, Evaluation } from "~~/shared/types";
 
 export interface PlanningResponse {
   scenarios: Scenario[];
@@ -26,6 +26,12 @@ export type ResolveTarget = (
   description: string | null,
   domSummary: string
 ) => Promise<string | null>;
+
+export interface StepResult {
+  step: ScenarioStep;
+  success: boolean;
+  error?: string;
+}
 
 export interface ScenarioResult {
   scenario: Scenario;

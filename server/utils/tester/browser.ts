@@ -1,8 +1,13 @@
 /// <reference lib="dom" />
 
 import { chromium, type Locator, type Page } from "playwright";
-import type { PageState, ResolveTarget, SessionHandle } from "../types";
-import type { Scenario, StepResult } from "~~/shared/types";
+import type {
+  PageState,
+  ResolveTarget,
+  SessionHandle,
+  StepResult
+} from "../types";
+import type { Scenario } from "~~/shared/types";
 
 const SELECTOR = "button, a, input, select, textarea";
 const VISIBLE_SELECTOR = `${SELECTOR}:visible`; // Playwright's own visibility check, applied consistently everywhere below

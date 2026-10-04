@@ -10,12 +10,6 @@ export interface ScenarioStep {
   value?: string | null;
 }
 
-export interface StepResult {
-  step: ScenarioStep;
-  success: boolean;
-  error?: string;
-}
-
 export interface Scenario {
   id: string;
   description: string;
@@ -40,6 +34,7 @@ export interface Scan {
   startDate: Date;
   endDate?: Date;
   scenarios?: Scenario[];
+  errorMsg?: string;
   scenarioCount?: number;
   tally?: Tally;
 }

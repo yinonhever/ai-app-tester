@@ -26,7 +26,7 @@ const evaluationSchema = new Schema<Evaluation>({
 const scenarioSchema = new Schema<Scenario>({
   id: { type: String, required: true },
   description: { type: String, required: true },
-  steps: [scenarioStepSchema],
+  steps: { type: [scenarioStepSchema], required: true },
   evaluation: { type: evaluationSchema, required: false }
 });
 
@@ -38,7 +38,8 @@ const scanSchema = new Schema<ScanType>(
     currentStage: { type: String, required: false },
     startDate: { type: Date, default: Date.now },
     endDate: { type: Date, required: false },
-    scenarios: { type: [scenarioSchema], default: () => [] }
+    scenarios: { type: [scenarioSchema], default: () => [] },
+    errorMsg: { type: String, required: false }
   },
   { timestamps: true }
 );

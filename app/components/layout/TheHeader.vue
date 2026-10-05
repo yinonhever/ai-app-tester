@@ -33,13 +33,12 @@ const navItems: NavItem[] = [
   { link: "/scans", text: "My Scans" }
 ];
 
-onMounted(() => {
-  window.addEventListener("resize", () => {
-    if (window.innerWidth > 600) {
-      showMobileMenu.value = false;
-    }
-  });
-});
+const handleResize = () => {
+  if (window.innerWidth > 600) showMobileMenu.value = false;
+};
+
+onMounted(() => window.addEventListener("resize", handleResize));
+onBeforeUnmount(() => window.removeEventListener("resize", handleResize));
 
 watch(showMobileMenu, value => {
   document.body.style.overflow = value ? "hidden" : "initial";
@@ -48,17 +47,17 @@ watch(showMobileMenu, value => {
 
 <style lang="scss">
 .header {
-  padding: 10px 50px;
+  padding: 5px 50px;
   background-color: $color4;
   color: #fff;
   z-index: 999;
 
   @include respond(tablet) {
-    padding: 10px 25px;
+    padding: 5px 25px;
   }
 
   @include respond(mobile) {
-    padding: 10px 12px;
+    padding: 8px 12px;
   }
 
   &__container {
@@ -120,6 +119,7 @@ watch(showMobileMenu, value => {
     list-style: none;
     display: flex;
     gap: 50px;
+    padding: 0;
 
     @include respond(tablet) {
       gap: 30px;

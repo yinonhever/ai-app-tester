@@ -1,11 +1,13 @@
 <template>
-  <div class="layout">
-    <TheHeader />
-    <div class="page-wrapper">
-      <slot />
+  <v-app>
+    <div class="layout">
+      <TheHeader />
+      <div class="page-wrapper">
+        <slot />
+      </div>
+      <TheFooter />
     </div>
-    <TheFooter />
-  </div>
+  </v-app>
 </template>
 
 <style lang="scss">

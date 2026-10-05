@@ -32,7 +32,7 @@ onMounted(() => {
 <style lang="scss">
 .page {
   position: relative;
-  padding: 40px $padding-sides-desktop;
+  padding: 40px $padding-sides-desktop 50px;
   height: 100%;
 
   @include respond(tablet-land) {
@@ -41,7 +41,7 @@ onMounted(() => {
   }
 
   @include respond(mobile) {
-    padding: 40px $padding-sides-mobile;
+    padding: 40px $padding-sides-mobile 50px;
   }
 
   &--dense {
@@ -62,6 +62,7 @@ onMounted(() => {
     font-weight: 800;
     font-size: 55px;
     color: $color1;
+    margin: 0;
 
     @include respond(mobile) {
       font-size: 40px;

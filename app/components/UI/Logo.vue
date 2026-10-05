@@ -18,7 +18,6 @@
 
   @include respond(mobile) {
     font-size: 25px;
-    transform: none;
   }
 }
 </style>

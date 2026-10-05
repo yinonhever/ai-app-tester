@@ -5,7 +5,8 @@ export default defineVuetifyConfiguration({
     themes: {
       light: {
         colors: {
-          primary: "#1976d2"
+          primary: "#1976d2",
+          info: "#7b1fa2"
         }
       }
     }

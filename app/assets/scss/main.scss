@@ -1,9 +1,14 @@
-*,
-*::before,
-*::after {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+h1,
+h2,
+h3,
+p {
+  &,
+  &::before,
+  &::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
 }
 
 // FONT
@@ -18,7 +23,7 @@ h3 {
 }
 
 // Links
-a {
+a:not(.v-btn) {
   text-decoration: none;
   color: inherit;
   transition: color 0.3s;
@@ -38,4 +43,13 @@ a {
 .page-enter-to,
 .page-leave-from {
   opacity: 1;
+}
+
+// UI ADJUSTMENTS
+.id-cell {
+  overflow-wrap: anywhere;
+}
+
+.result-badge {
+  font-weight: 600;
 }

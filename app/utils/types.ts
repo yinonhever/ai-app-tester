@@ -3,6 +3,7 @@ import type {
   Scenario as ScenarioData,
   ScenarioStep as ScenarioStepData
 } from "~~/shared/types";
+import type { FetchError } from "ofetch";
 
 type WithDatabaseMeta<T> = T & {
   _id: string;
@@ -12,6 +13,12 @@ type WithDatabaseMeta<T> = T & {
 
 export type Scan = WithDatabaseMeta<ScanData>;
 
+export type FormattedScan = Scan & {
+  formattedStartDate?: string;
+  formattedEndDate?: string;
+  formattedStatus?: string;
+};
+
 export type Scenario = WithDatabaseMeta<ScenarioData>;
 
 export type ScenarioStep = WithDatabaseMeta<ScenarioStepData>;
@@ -20,3 +27,32 @@ export interface NavItem {
   link: string;
   text: string;
 }
+
+export type BaseError = Error | FetchError | string | null | undefined;
+
+export interface TableHeader<T = string> {
+  title: string;
+  key?: string | "actions";
+  value?: T | "actions";
+  include?: boolean;
+  sortable?: boolean;
+  sort?: (a: any, b: any) => any;
+  fixed?: boolean;
+  width?: string;
+  maxWidth?: string;
+  minWidth?: string;
+  cellProps?: { class?: string };
+  headerProps?: { class?: string };
+}
+
+export interface Notification {
+  id: string;
+  content: string;
+  icon: string;
+}
+
+export type AddNotification = (content: string, icon: string) => void;
+
+export type RemoveNotification = (id: string) => void;
+
+export type ResultSummaryType = "grid" | "row";

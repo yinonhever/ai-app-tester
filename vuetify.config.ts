@@ -12,12 +12,12 @@ export default defineVuetifyConfiguration({
     }
   },
   defaults: {
-    VTextField: { variant: "underlined", color: "primary" },
-    VAutocomplete: { variant: "underlined", color: "primary" },
-    VSelect: { variant: "underlined", color: "primary" },
-    VCombobox: { variant: "underlined", color: "primary" },
-    VTextarea: { variant: "underlined", color: "primary" },
-    VFileInput: { variant: "underlined", color: "primary" },
+    VTextField: { color: "primary" },
+    VAutocomplete: { color: "primary" },
+    VSelect: { color: "primary" },
+    VCombobox: { color: "primary" },
+    VTextarea: { color: "primary" },
+    VFileInput: { color: "primary" },
     VRadioGroup: { color: "primary" },
     VRadio: { color: "primary" },
     VCheckbox: { color: "primary" },

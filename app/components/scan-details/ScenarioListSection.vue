@@ -9,6 +9,7 @@
           chips
           closable-chips
           clearable
+          variant="outlined"
           label="Filter by result"
         />
       </div>
@@ -74,6 +75,6 @@ const resultOptions = VERDICTS.map(verdict => ({
   display: grid;
   grid-template-columns: 1fr;
   margin: auto;
-  max-width: 400px;
+  max-width: 500px;
 }
 </style>

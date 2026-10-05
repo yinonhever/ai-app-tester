@@ -1,4 +1,4 @@
-import type { TableHeader, Scan, FormattedScan } from "./types";
+import type { TableHeader, Scan, FormattedScan, Scenario } from "./types";
 import _ from "lodash";
 import dayjs from "dayjs";
 
@@ -32,6 +32,7 @@ export const formatDate = (date: string | Date) =>
 
 export const formatScanData = (scan: Scan): FormattedScan => ({
   ...scan,
+  scenarios: (scan.scenarios ?? []) as Scenario[],
   formattedStartDate: formatDate(scan.startDate),
   formattedEndDate: scan.endDate && formatDate(scan.endDate),
   formattedStatus: formatStatus(scan.status)

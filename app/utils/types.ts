@@ -17,9 +17,12 @@ export type FormattedScan = Scan & {
   formattedStartDate?: string;
   formattedEndDate?: string;
   formattedStatus?: string;
+  scenarios?: Scenario[];
 };
 
-export type Scenario = WithDatabaseMeta<ScenarioData>;
+export type Scenario = WithDatabaseMeta<ScenarioData> & {
+  steps: ScenarioStep[];
+};
 
 export type ScenarioStep = WithDatabaseMeta<ScenarioStepData>;
 
@@ -32,7 +35,7 @@ export type BaseError = Error | FetchError | string | null | undefined;
 
 export interface TableHeader<T = string> {
   title: string;
-  key?: string | "actions";
+  key?: T | "actions";
   value?: T | "actions";
   include?: boolean;
   sortable?: boolean;

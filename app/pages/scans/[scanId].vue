@@ -5,7 +5,7 @@
     <main v-else-if="scan" class="scan-details-wrapper">
       <ScanDetailsSection :scan="scan" />
       <ScanResultSummarySection :scan="scan" />
-      <ScenarioListSection :scan="scan" />
+      <ScenarioListSection :scenarios="scan.scenarios" />
     </main>
   </Page>
 </template>
@@ -57,7 +57,6 @@ onBeforeUnmount(() => clearInterval(interval.value));
 
   @include respond(tablet-land) {
     grid-template-columns: 1fr;
-    
   }
 
   & > *:last-child {

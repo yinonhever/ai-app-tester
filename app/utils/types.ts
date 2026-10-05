@@ -1,7 +1,8 @@
 import type {
   Scan as ScanData,
   Scenario as ScenarioData,
-  ScenarioStep as ScenarioStepData
+  ScenarioStep as ScenarioStepData,
+  Verdict
 } from "~~/shared/types";
 import type { FetchError } from "ofetch";
 
@@ -59,3 +60,7 @@ export type AddNotification = (content: string, icon: string) => void;
 export type RemoveNotification = (id: string) => void;
 
 export type ResultSummaryType = "grid" | "row";
+
+export interface ScenarioFilters {
+  result: Verdict[];
+}

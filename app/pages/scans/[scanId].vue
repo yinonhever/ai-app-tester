@@ -55,6 +55,11 @@ onBeforeUnmount(() => clearInterval(interval.value));
   grid-template-columns: 1.5fr 1fr;
   gap: 40px;
 
+  @include respond(tablet-land) {
+    grid-template-columns: 1fr;
+    
+  }
+
   & > *:last-child {
     grid-column: 1 / -1;
   }

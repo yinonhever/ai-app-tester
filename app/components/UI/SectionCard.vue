@@ -15,11 +15,20 @@ defineProps<{ title?: string }>();
 .section-card {
   padding: 16px 20px;
 
+  @include respond(mobile) {
+    padding: 14px;
+  }
+
   &__heading {
     font-weight: 700;
     font-size: 25px;
     text-align: center;
     margin-bottom: 25px;
+
+    @include respond(mobile) {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
   }
 }
 </style>

@@ -57,7 +57,7 @@ const duration = computed(() => {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
 
     & > * {
       display: block;
@@ -66,6 +66,10 @@ const duration = computed(() => {
 
   &__title {
     font-weight: 700;
+  }
+
+  &__value {
+    text-align: right;
   }
 }
 </style>

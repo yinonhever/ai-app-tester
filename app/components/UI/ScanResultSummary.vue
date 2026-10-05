@@ -37,6 +37,11 @@ const classes = computed(() => [
     display: grid;
     grid-template-columns: repeat(4, 28px);
     gap: 20px;
+
+    @include respond(mobile) {
+      grid-template-columns: repeat(2, 28px);
+      gap: 8px 20px;
+    }
   }
 
   &__item {
@@ -46,6 +51,10 @@ const classes = computed(() => [
 
   &--row &__item {
     gap: 4px;
+
+    @include respond(mobile) {
+      gap: 3px;
+    }
   }
 }
 </style>

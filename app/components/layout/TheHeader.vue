@@ -47,17 +47,17 @@ watch(showMobileMenu, value => {
 
 <style lang="scss">
 .header {
-  padding: 5px 50px;
+  padding: 5px $padding-sides-desktop;
   background-color: $color4;
   color: #fff;
   z-index: 999;
 
   @include respond(tablet) {
-    padding: 5px 25px;
+    padding: 5px $padding-sides-desktop;
   }
 
   @include respond(mobile) {
-    padding: 8px 12px;
+    padding: 8px $padding-sides-mobile;
   }
 
   &__container {

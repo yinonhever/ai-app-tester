@@ -1,14 +1,18 @@
 <template>
-  <v-chip :color="color" :prepend-icon="icon" class="result-badge">
+  <v-chip :color="color" :prepend-icon="icon" :size="size" class="result-badge">
     {{ text }}
   </v-chip>
 </template>
 
 <script setup lang="ts">
 import type { ScanStatus } from "~~/shared/types";
+import type { VChip } from "vuetify/components";
 import { formatStatus } from "#imports";
 
-const props = defineProps<{ status: ScanStatus }>();
+const props = defineProps<{
+  status: ScanStatus;
+  size?: VChip["$props"]["size"];
+}>();
 
 const color = computed(() => {
   switch (props.status) {

@@ -21,7 +21,7 @@
       item-value="_id"
       :items-per-page="50"
       :cell-props="{ class: 'py-3' }"
-      no-data-text="No matching scenarios"
+      :no-data-text="noDataText"
     >
       <template #item.steps="{ item }">
         <ScenarioStepList :steps="item.steps" />
@@ -68,6 +68,12 @@ const resultOptions = VERDICTS.map(verdict => ({
   value: verdict,
   title: formatStatus(verdict)
 }));
+
+const noDataText = computed(() =>
+  props.scenarios?.length
+    ? "No matching scenarios"
+    : "Scenarios will appear once they're generated"
+);
 </script>
 
 <style lang="scss">

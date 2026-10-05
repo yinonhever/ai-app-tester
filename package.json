@@ -20,6 +20,7 @@
     "pretty-ms": "^9.3.1",
     "uniqid": "^5.4.0",
     "vue": "^3.5.43",
+    "vue-clamp": "^1.7.2",
     "vue-router": "^5.3.1",
     "vuetify": "^4.2.3",
     "vuetify-nuxt-module": "^1.0.0-rc.6",

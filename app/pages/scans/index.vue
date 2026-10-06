@@ -8,7 +8,7 @@
       :items="items ?? []"
       class="elevation-2"
       item-value="_id"
-      :items-per-page="10"
+      :items-per-page="25"
     >
       <template #item._id="{ item }">
         <div class="id-cell">{{ item._id }}</div>

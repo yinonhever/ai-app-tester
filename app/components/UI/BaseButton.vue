@@ -24,5 +24,7 @@ defineProps<{
 <style langs="scss">
 .button {
   letter-spacing: 0.1em;
+  font-size: 0.875rem;
+  font-weight: 500;
 }
 </style>

@@ -6,7 +6,6 @@
       placeholder="https://example.com"
       required
       type="url"
-      :rules="[urlRule]"
       clearable
       variant="outlined"
     />
@@ -44,15 +43,6 @@ const submitHandler = async () => {
     error.value = err;
   } finally {
     loading.value = false;
-  }
-};
-
-const urlRule = (value: string) => {
-  try {
-    new URL(value);
-    return true;
-  } catch {
-    return "Please enter a valid URL";
   }
 };
 </script>

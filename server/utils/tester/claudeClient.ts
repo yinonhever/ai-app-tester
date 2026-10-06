@@ -41,7 +41,7 @@ export const askClaudeJSON = async <T = unknown>(
       },
       body: {
         model: CLAUDE_MODEL,
-        max_tokens: 1500,
+        max_tokens: 8000,
         messages: [{ role: "user", content }]
       }
     });

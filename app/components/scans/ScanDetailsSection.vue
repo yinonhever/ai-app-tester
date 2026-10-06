@@ -70,6 +70,7 @@ const duration = computed(() => {
 
   &__value {
     text-align: right;
+    overflow-wrap: anywhere;
   }
 }
 </style>

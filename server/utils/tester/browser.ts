@@ -111,7 +111,16 @@ export const snapshot = async (
   failedRequests: string[]
 ): Promise<PageState> => {
   await autoScroll(page);
-  const screenshot = await page.screenshot({ fullPage: true });
+  const pageHeight = await page.evaluate(() => document.body.scrollHeight);
+  const viewportWidth = await page.evaluate(() => window.innerWidth);
+  const screenshot = await page.screenshot({
+    clip: {
+      x: 0,
+      y: 0,
+      width: viewportWidth,
+      height: Math.min(pageHeight, 7800)
+    }
+  });
   const domSummary = await getElementList(page);
   const newConsoleErrors = consoleErrors.splice(0, consoleErrors.length);
   const newFailedRequests = failedRequests.splice(0, failedRequests.length);

@@ -32,7 +32,6 @@ export const formatDate = (date: string | Date) =>
 
 export const formatScanData = (scan: Scan): FormattedScan => ({
   ...scan,
-  scenarios: (scan.scenarios ?? []) as Scenario[],
   formattedStartDate: formatDate(scan.startDate),
   formattedEndDate: scan.endDate && formatDate(scan.endDate),
   formattedStatus: formatStatus(scan.status)

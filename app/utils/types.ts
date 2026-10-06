@@ -12,13 +12,14 @@ type WithDatabaseMeta<T> = T & {
   updatedAt?: string;
 };
 
-export type Scan = WithDatabaseMeta<ScanData>;
+export type Scan = WithDatabaseMeta<ScanData> & {
+  scenarios?: Scenario[];
+};
 
 export type FormattedScan = Scan & {
   formattedStartDate?: string;
   formattedEndDate?: string;
   formattedStatus?: string;
-  scenarios?: Scenario[];
 };
 
 export type Scenario = WithDatabaseMeta<ScenarioData> & {

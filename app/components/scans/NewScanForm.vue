@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-const formData = reactive({
+const formData = reactive<Partial<Scan>>({
   targetUrl: "",
   maxScenarios: 25
 });

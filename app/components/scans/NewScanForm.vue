@@ -13,7 +13,7 @@
       v-model="formData.maxScenarios"
       label="Max. scenarios"
       required
-      :min="0"
+      :min="1"
       :step="1"
       variant="outlined"
     />

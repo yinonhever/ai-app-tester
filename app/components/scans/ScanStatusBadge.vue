@@ -17,7 +17,7 @@ const props = defineProps<{
 const color = computed(() => {
   switch (props.status) {
     case "completed":
-      return "success";
+      return "primary";
     case "in_progress":
       return "warning";
     case "error":

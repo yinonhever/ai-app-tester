@@ -19,11 +19,7 @@ const updateStoppedScans = async () => {
 };
 
 export default defineNitroPlugin(() => {
-  if (mongoose.connection.readyState === 1) {
+  mongoose.connection.on("connected", () => {
     updateStoppedScans();
-  } else {
-    mongoose.connection.on("connected", () => {
-      updateStoppedScans();
-    });
-  }
+  });
 });

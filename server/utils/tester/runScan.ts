@@ -143,7 +143,7 @@ the actual cart content (items, or a correct empty-cart message) is displayed co
 
 Only mark FAIL if the empty state appears despite items that should be present, if the cart
 UI doesn't appear or render at all after the click, or if the interface is otherwise broken
-(not responding, showing a visible error).
+(not responding or showing a visible error).
 
 Do not choose FAIL if your own explanation expresses uncertainty (words like "unclear",
 "may have", "without clear confirmation", "questionable"). If you are not fully certain

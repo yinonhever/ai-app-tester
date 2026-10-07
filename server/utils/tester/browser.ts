@@ -30,7 +30,8 @@ export const launchSession = async (url: string): Promise<SessionHandle> => {
     r => r.status() >= 400 && failedRequests.push(`${r.status()} ${r.url()}`)
   );
 
-  await page.goto(url, { waitUntil: "networkidle" });
+  await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30000 });
+  await page.waitForTimeout(1000);
   return { browser, page, consoleErrors, failedRequests };
 };
 

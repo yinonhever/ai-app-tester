@@ -4,7 +4,7 @@
 // Stage 4: AI evaluates the outcome and labels it PASS / FAIL / SUSPICIOUS / IMPROVEMENT
 
 import { launchSession, snapshot, runScenario } from "./browser";
-import { askClaudeJSON } from "./claudeClient";
+import { askClaudeJSON, askClaudeText } from "./claudeClient";
 import type {
   PageState,
   PlanningResponse,
@@ -133,9 +133,17 @@ If you truly cannot tell from the screenshot, use SUSPICIOUS rather than guessin
 
 If the scenario involves viewing a cart, list, or search results, an "empty" state
 (e.g. "Your cart is empty") is the CORRECT and EXPECTED result when nothing was added
-or no matching items exist — it is NOT a bug. Only mark FAIL if the empty state appears
-despite items that should be present, or if the interface itself is broken (not displaying,
-not responding, showing an error).
+or no matching items exist — it is NOT a bug.
+
+A cart opening as a modal, drawer, or sidebar overlay on the current page — rather than
+navigating to a separate, dedicated cart page with its own URL — is a completely standard,
+widely-used e-commerce pattern. NEVER treat an unchanged URL as evidence of failure for a
+cart/menu/filter interaction; these commonly open as overlays by design. Judge only whether
+the actual cart content (items, or a correct empty-cart message) is displayed correctly.
+
+Only mark FAIL if the empty state appears despite items that should be present, if the cart
+UI doesn't appear or render at all after the click, or if the interface is otherwise broken
+(not responding, showing a visible error).
 
 Do not choose FAIL if your own explanation expresses uncertainty (words like "unclear",
 "may have", "without clear confirmation", "questionable"). If you are not fully certain
@@ -205,6 +213,7 @@ export const runScan = async (scan: ScanDocument) => {
     await scan.save();
 
     const results: ScenarioResult[] = [];
+    let accessibilityNoted = false;
 
     for (const [scenarioIndex, scenario] of chosen.entries()) {
       console.log(`\n--- Running: ${scenario.description} ---`);
@@ -232,8 +241,23 @@ export const runScan = async (scan: ScanDocument) => {
             afterState.screenshot
           )
         : buildAutomationFailureEvaluation(stepResults);
-
       console.log(`  -> ${evaluation.verdict}: ${evaluation.explanation}`);
+
+      if (evaluation.verdict === "PASS") {
+        const unlabeledCount = (
+          afterState.domSummary.match(/\(unlabeled\)/g) || []
+        ).length;
+
+        if (unlabeledCount > 0 && !accessibilityNoted) {
+          evaluation.verdict = "IMPROVEMENT";
+          evaluation.explanation = `${unlabeledCount} interactive element(s) on this page have no accessible label (no aria-label, visible text, or title) — this is a recurring pattern across the site and a real accessibility gap for screen reader users.`;
+          accessibilityNoted = true;
+          console.log(
+            `  After checking accessibility: -> ${evaluation.verdict}: ${evaluation.explanation}`
+          );
+        }
+      }
+
       results.push({ scenario, evaluation });
 
       const scenarioInDocument = scan.scenarios.find(

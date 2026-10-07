@@ -6,24 +6,15 @@ const MAX_ATTEMPTS = 3;
 const NON_RETRYABLE_STATUSES = new Set([400, 401, 403, 404, 422]);
 
 /**
- * Sends a prompt (plus an optional screenshot) to Claude and returns the
- * parsed JSON response. Generic so callers get a typed result back instead
- * of `any` — e.g. askClaudeJSON<PlanningResponse>(...).
- *
- * Retries on network failures, 429s, and 5xx errors (all transient).
- * Fails immediately on 400/401/403/404/422 — these are wrong about the
- * request itself, so retrying cannot help and would only waste time.
+ * Shared request logic: sends a prompt (plus an optional screenshot) to
+ * Claude, retries on transient failures, and returns the raw text response.
+ * Both askClaudeJSON and askClaudeText build on this.
  */
-export const askClaudeJSON = async <T = unknown>(
+const callClaude = async (
   promptText: string,
   screenshot?: Buffer
-): Promise<T> => {
-  const content: unknown[] = [
-    {
-      type: "text",
-      text: promptText + "\n\nRespond with ONLY the JSON, no other text."
-    }
-  ];
+): Promise<string> => {
+  const content: unknown[] = [{ type: "text", text: promptText }];
 
   if (screenshot) {
     content.push({
@@ -64,7 +55,7 @@ export const askClaudeJSON = async <T = unknown>(
         console.log(
           `Claude request failed (${status ?? "network error"}), retrying (attempt ${attempt + 1}/${MAX_ATTEMPTS})...`
         );
-        await delay(2000);
+        await delay(2000 * attempt);
         continue;
       }
 
@@ -79,9 +70,36 @@ export const askClaudeJSON = async <T = unknown>(
     throw new Error("Claude API error: no response received after retries");
   }
 
-  const text =
-    data.content[0]?.text.trim().replace(/^```json\n?|\n?```$/g, "") ?? "";
-  return extractJSON<T>(text);
+  return data.content[0]?.text.trim() ?? "";
+};
+
+/**
+ * Sends a prompt (plus an optional screenshot) to Claude and returns the
+ * parsed JSON response. Generic so callers get a typed result back instead
+ * of `any` — e.g. askClaudeJSON<PlanningResponse>(...).
+ */
+export const askClaudeJSON = async <T = unknown>(
+  promptText: string,
+  screenshot?: Buffer
+): Promise<T> => {
+  const text = await callClaude(
+    promptText + "\n\nRespond with ONLY the JSON, no other text.",
+    screenshot
+  );
+  const cleaned = text.replace(/^```json\n?|\n?```$/g, "");
+  return extractJSON<T>(cleaned);
+};
+
+/**
+ * Sends a prompt (plus an optional screenshot) to Claude and returns the
+ * raw text response, unparsed — for prompts that ask for plain text
+ * rather than JSON (e.g. a one-sentence answer, or NONE).
+ */
+export const askClaudeText = async (
+  promptText: string,
+  screenshot?: Buffer
+): Promise<string> => {
+  return callClaude(promptText, screenshot);
 };
 
 const extractJSON = <T>(text: string): T => {

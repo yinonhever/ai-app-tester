@@ -145,8 +145,8 @@ export const runScenario = async (
   for (const step of scenario.steps) {
     try {
       if (step.type === "back") {
-        await page.goBack({ waitUntil: "networkidle" });
-        await page.waitForTimeout(400);
+        await page.goBack({ waitUntil: "domcontentloaded", timeout: 30000 });
+        await page.waitForTimeout(1000);
         await autoScroll(page);
         stepResults.push({ step, success: true });
         continue;
@@ -179,8 +179,8 @@ export const runScenario = async (
 
       // Let any navigation/lazy-loading triggered by that action actually
       // finish before we trust the next snapshot's element list.
-      await page.waitForLoadState("networkidle").catch(() => {});
-      await page.waitForTimeout(600);
+      await page.waitForLoadState("domcontentloaded").catch(() => {});
+      await page.waitForTimeout(1000);
 
       await autoScroll(page);
       stepResults.push({ step, success: true });

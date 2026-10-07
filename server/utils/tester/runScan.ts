@@ -117,6 +117,13 @@ Look at the attached screenshot of the resulting page. Decide a verdict:
 - SUSPICIOUS: unclear / looks possibly wrong but not certain — flag for human review instead of calling it a confirmed bug
 - IMPROVEMENT: it technically works, but something could be clearer, more accessible, or better designed
 
+Even when a scenario technically works (which would otherwise be PASS), actively
+consider whether it could be IMPROVEMENT instead: look for missing feedback after
+an action (no confirmation, no loading state), unclear or generic button/link text,
+inconsistent styling, or anything that works but would confuse a real user. Don't
+default to PASS just because nothing is broken — only use PASS if you've actively
+considered and ruled out quality issues, not merely confirmed functionality.
+
 If a step failed to interact with an element (timeout, not clickable), this could mean
 EITHER the test automation targeted the wrong element, OR the app genuinely has a broken/
 unresponsive control. Look at the screenshot carefully: does the element appear visibly

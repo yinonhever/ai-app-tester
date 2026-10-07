@@ -16,10 +16,13 @@ export const convertScanData = (scan: Scan, includeScenarios = true): Scan => {
       scenario.scenarioNum = index + 1;
     });
   }
-  
+
   return {
     ...(includeScenarios ? scan : dataWithoutScenarios),
     scenarioCount: scenarios?.length ?? 0,
     tally: getResultTally(scan)
   };
 };
+
+export const delay = (ms: number) =>
+  new Promise(resolve => setTimeout(resolve, ms));

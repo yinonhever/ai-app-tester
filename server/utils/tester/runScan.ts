@@ -4,7 +4,7 @@
 // Stage 4: AI evaluates the outcome and labels it PASS / FAIL / SUSPICIOUS / IMPROVEMENT
 
 import { launchSession, snapshot, runScenario } from "./browser";
-import { askClaudeJSON, askClaudeText } from "./claudeClient";
+import { askClaudeJSON } from "./claudeClient";
 import type {
   PageState,
   PlanningResponse,

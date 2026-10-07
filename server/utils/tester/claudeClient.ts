@@ -80,14 +80,33 @@ const callClaude = async (
  */
 export const askClaudeJSON = async <T = unknown>(
   promptText: string,
-  screenshot?: Buffer
+  screenshot?: Buffer,
+  jsonRetries = 2
 ): Promise<T> => {
-  const text = await callClaude(
-    promptText + "\n\nRespond with ONLY the JSON, no other text.",
-    screenshot
-  );
-  const cleaned = text.replace(/^```json\n?|\n?```$/g, "");
-  return extractJSON<T>(cleaned);
+  const fullPrompt =
+    promptText +
+    "\n\nRespond with ONLY the JSON, no other text. If any text value " +
+    "would contain a double-quote character, omit it or rephrase instead " +
+    "of including it literally.";
+
+  for (let attempt = 1; attempt <= jsonRetries; attempt++) {
+    const text = await callClaude(fullPrompt, screenshot);
+    const cleaned = text.replace(/^```json\n?|\n?```$/g, "");
+
+    try {
+      return extractJSON<T>(cleaned);
+    } catch (err) {
+      if (attempt === jsonRetries) throw err;
+      console.log(
+        `JSON parse failed, retrying (attempt ${attempt + 1}/${jsonRetries})...`
+      );
+    }
+  }
+
+  // Unreachable: the loop above always either returns or throws on its
+  // final attempt. This satisfies TypeScript's control-flow analysis,
+  // which can't prove that on its own.
+  throw new Error("askClaudeJSON: exhausted retries without resolving");
 };
 
 /**
